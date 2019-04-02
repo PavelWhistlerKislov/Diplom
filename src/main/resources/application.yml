@@ -1,0 +1,8 @@
+datasource:
+    url: jdbc:postgresql://localhost:5432/ugd_bpm
+    username: ugd
+    password: P@ssw0rd
+    driver-class-name: org.postgresql.Driver
+
+
+
