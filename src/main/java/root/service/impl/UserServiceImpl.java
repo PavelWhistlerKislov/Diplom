@@ -1,6 +1,7 @@
 package root.service.impl;
 
 import root.domain.model.User;
+import root.service.UserService;
 
 import java.util.UUID;
 

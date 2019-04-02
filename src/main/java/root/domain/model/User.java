@@ -1,17 +1,24 @@
 package root.domain.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "users")
 public class User {
+
     @Id
+    @Column(name = "id")
     private String id;
+
+    @Column(name = "name")
     private String firstname;
+
+    @Column(name = "last_name")
     private String lastname;
+
+    @Column(name = "gruop")
     private String group;
+    @Column(name = "course")
     private String course;
 
     public User(){}
