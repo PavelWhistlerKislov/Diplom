@@ -1,5 +1,6 @@
 package root.domain.model;
 
+import org.springframework.lang.NonNull;
 import root.domain.model.enums.QuestionType;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ public class Question {
     @Id
     @GeneratedValue
     @Column(name = "id")
+    @NonNull
     private String Id;
 
     @Column(name = "question_message")

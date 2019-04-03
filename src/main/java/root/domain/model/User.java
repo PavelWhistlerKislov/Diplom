@@ -1,5 +1,6 @@
 package root.domain.model;
 
+import org.springframework.lang.NonNull;
 import root.domain.model.enums.UserRole;
 
 import javax.persistence.*;
@@ -10,8 +11,8 @@ import java.util.UUID;
 public class User{
 
     @Id
-    @GeneratedValue
     @Column(name = "id")
+    @NonNull
     private String id;
 
     @Column(name = "name")
@@ -22,8 +23,17 @@ public class User{
 
     @Column(name = "gruop")
     private String group;
+
     @Column(name = "course")
     private String course;
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
 
     @Column(name = "role")
     private UserRole role;
