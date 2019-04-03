@@ -1,34 +1,48 @@
 package root.domain.model;
 
+import root.domain.model.enums.UserRole;
+
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User{
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     private String id;
 
     @Column(name = "name")
-    private String firstname;
+    private String firstName;
 
     @Column(name = "last_name")
-    private String lastname;
+    private String lastName;
 
     @Column(name = "gruop")
     private String group;
     @Column(name = "course")
     private String course;
 
-    public User(){}
+    @Column(name = "role")
+    private UserRole role;
+
+    public User(){
+        this.id = UUID.randomUUID().toString();
+    }
+
+    public User(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public String getFirstname() {
-        return firstname;
+        return firstName;
     }
 
     public String getLastname() {
-        return lastname;
+        return lastName;
     }
 
     public String getId() {
@@ -40,11 +54,11 @@ public class User {
     }
 
     public void setFirstname(String firstname) {
-        this.firstname = firstname;
+        this.firstName = firstname;
     }
 
     public void setLastname(String lastname) {
-        this.lastname = lastname;
+        this.lastName = lastname;
     }
 
     public String getGroup() {
