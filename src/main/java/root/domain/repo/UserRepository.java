@@ -7,6 +7,6 @@ import root.domain.model.User;
 
 import java.util.List;
 
-public interface UserRepository extends CrudRepository<User, Long>, QuerydslPredicateExecutor<User> {
+public interface UserRepository extends JpaRepository<User, String>, QuerydslPredicateExecutor<User> {
     List<User> findByLastNameStartsWithIgnoreCase(String lastName);
 }

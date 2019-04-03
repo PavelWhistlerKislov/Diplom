@@ -11,8 +11,7 @@ import java.util.UUID;
 public class User{
 
     @Id
-    @Column(name = "id")
-    @NonNull
+    @Column(name = "id", nullable = false, unique = true)
     private String id;
 
     @Column(name = "name")

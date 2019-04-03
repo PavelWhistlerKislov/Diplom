@@ -12,9 +12,8 @@ public class Question {
 
     @Id
     @GeneratedValue
-    @Column(name = "id")
-    @NonNull
-    private String Id;
+    @Column(name = "id", nullable = false, unique = true)
+    private String id;
 
     @Column(name = "question_message")
     private String questionMessage;
@@ -26,15 +25,15 @@ public class Question {
     private String testId;
 
     public Question(){
-        this.Id = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID().toString();
     }
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getQuestionMessage() {
