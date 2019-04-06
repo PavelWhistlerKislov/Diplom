@@ -1,6 +1,5 @@
 package root.domain.model;
 
-import org.springframework.lang.NonNull;
 import root.domain.model.enums.UserRole;
 
 import javax.persistence.*;
@@ -14,7 +13,7 @@ public class User{
     @Column(name = "id", nullable = false, unique = true)
     private String id;
 
-    @Column(name = "name")
+    @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "last_name")
@@ -25,14 +24,6 @@ public class User{
 
     @Column(name = "course")
     private String course;
-
-    public UserRole getRole() {
-        return role;
-    }
-
-    public void setRole(UserRole role) {
-        this.role = role;
-    }
 
     @Column(name = "role")
     private UserRole role;
@@ -46,14 +37,6 @@ public class User{
         this.lastName = lastName;
     }
 
-    public String getFirstname() {
-        return firstName;
-    }
-
-    public String getLastname() {
-        return lastName;
-    }
-
     public String getId() {
         return id;
     }
@@ -62,12 +45,20 @@ public class User{
         this.id = id;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstName = firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastName = lastname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getGroup() {
@@ -84,5 +75,13 @@ public class User{
 
     public void setCourse(String course) {
         this.course = course;
+    }
+
+    public UserRole getRole() {
+       return role;
+   }
+
+    public void setRole(UserRole role) {
+       this.role = role;
     }
 }
