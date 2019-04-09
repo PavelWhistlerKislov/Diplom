@@ -4,22 +4,22 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "questions")
-public class Question {
+@Table(name = "closed_questions")
+public class ClosedQuestion {
 
     @Id
-    @GeneratedValue
     @Column(name = "id", nullable = false, unique = true)
     private String id;
 
-    @Column(name = "question_message")
+    @Column(name = "question_message", nullable = false)
     private String questionMessage;
 
+    //TODO: Доделать
 
     @Column(name = "test_id")
     private String testId;
 
-    public Question(){
+    public ClosedQuestion(){
         this.id = UUID.randomUUID().toString();
     }
 

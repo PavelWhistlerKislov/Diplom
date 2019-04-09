@@ -31,7 +31,7 @@ public class User{
     @Column(name = "password", nullable = false)
     private String password;
 
-    Co
+    //TODO:GROUP
 
     public User(){
         this.id = UUID.randomUUID().toString();
