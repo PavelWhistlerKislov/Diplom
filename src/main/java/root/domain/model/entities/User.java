@@ -1,4 +1,4 @@
-package root.domain.model;
+package root.domain.model.entities;
 
 import root.domain.model.enums.UserRole;
 
@@ -13,14 +13,11 @@ public class User{
     @Column(name = "id", nullable = false, unique = true)
     private String id;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
-
-    @Column(name = "gruop")
-    private String group;
 
     @Column(name = "course")
     private String course;
@@ -28,14 +25,24 @@ public class User{
     @Column(name = "role")
     private UserRole role;
 
+    @Column(name = "login", nullable = false)
+    private String login;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    Co
+
     public User(){
         this.id = UUID.randomUUID().toString();
     }
 
     public User(String firstName, String lastName) {
+        this.id = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
 
     public String getId() {
         return id;
@@ -61,14 +68,6 @@ public class User{
         this.lastName = lastName;
     }
 
-    public String getGroup() {
-        return group;
-    }
-
-    public void setGroup(String group) {
-        this.group = group;
-    }
-
     public String getCourse() {
         return course;
     }
@@ -78,10 +77,26 @@ public class User{
     }
 
     public UserRole getRole() {
-       return role;
-   }
+        return role;
+    }
 
     public void setRole(UserRole role) {
-       this.role = role;
+        this.role = role;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
