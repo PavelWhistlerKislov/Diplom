@@ -16,8 +16,9 @@ public class ClosedQuestion {
 
     //TODO: Доделать
 
-    @Column(name = "test_id")
-    private String testId;
+    @ManyToOne
+    @JoinColumn(name="test_id")
+    private Test test;
 
     public ClosedQuestion(){
         this.id = UUID.randomUUID().toString();
@@ -39,12 +40,11 @@ public class ClosedQuestion {
         this.questionMessage = questionMessage;
     }
 
-
-    public String getTestId() {
-        return testId;
+    public Test getTest() {
+        return test;
     }
 
-    public void setTestId(String testId) {
-        this.testId = testId;
+    public void setTest(Test test) {
+        this.test = test;
     }
 }
