@@ -1,9 +1,9 @@
 package root.domain.model.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
+
+import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @Table(name = "subjects")
@@ -16,5 +16,10 @@ public class Subject {
     @Column(name = "subject_name", nullable = false)
     private String subjectName;
 
-    //TODO: ПОЛЕ MODULES
+
+    @ManyToMany(mappedBy = "learnedSubjects")
+    private Set<User> students;
+
+    @OneToMany(cascade=ALL, mappedBy = "modules")
+    private Set<Module> modules;
 }

@@ -3,6 +3,7 @@ package root.domain.model.entities;
 import root.domain.model.enums.UserRole;
 
 import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -31,7 +32,26 @@ public class User{
     @Column(name = "password", nullable = false)
     private String password;
 
-    //TODO:GROUP
+    @ManyToOne
+    @JoinColumn(name="group_id")
+    private Group group;
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_subjects",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id"))
+    private Set<Subject> learnedSubjects;
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+
 
     public User(){
         this.id = UUID.randomUUID().toString();

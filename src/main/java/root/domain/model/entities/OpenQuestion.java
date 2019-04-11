@@ -1,9 +1,6 @@
 package root.domain.model.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "open_questions")
@@ -21,6 +18,7 @@ public class OpenQuestion {
     @Column(name = "given_answer")
     String givenAnswer;
 
-    @Column(name = "test_id")
-    private String testId;
+    @ManyToOne
+    @JoinColumn(name="test_id")
+    private Test test;
 }
