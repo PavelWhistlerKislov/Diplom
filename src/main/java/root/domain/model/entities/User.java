@@ -4,6 +4,7 @@ import root.domain.model.enums.UserRole;
 
 import javax.management.relation.Role;
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -21,9 +22,6 @@ public class User{
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "course")
-    private String course;
-
     @Column(name = "role",nullable = false)
     private UserRole role;
 
@@ -37,40 +35,17 @@ public class User{
     @JoinColumn(name="group_id")
     private Group group;
 
-    public Set<Answer> getAnswers() {
-        return answers;
-    }
 
-    public void setAnswers(Set<Answer> answers) {
-        this.answers = answers;
-    }
-
-    public Set<Subject> getLearnedSubjects() {
-        return learnedSubjects;
-    }
-
-    public void setLearnedSubjects(Set<Subject> learnedSubjects) {
-        this.learnedSubjects = learnedSubjects;
-    }
-
-    @OneToMany(mappedBy = "answers")
+    @OneToMany(mappedBy = "user")
     private Set<Answer> answers;
 
     @ManyToMany
     @JoinTable(
-            name = "users_subjects",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "subject_id"))
-    private Set<Subject> learnedSubjects;
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
-    }
-
+            name = "user_subject",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "subject_id") }
+    )
+    Set<Subject> subjects = new HashSet<>();
 
 
     public User(){
@@ -111,14 +86,6 @@ public class User{
         this.lastName = lastName;
     }
 
-    public String getCourse() {
-        return course;
-    }
-
-    public void setCourse(String course) {
-        this.course = course;
-    }
-
     public UserRole getRole() {
         return role;
     }
@@ -141,5 +108,21 @@ public class User{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
     }
 }

@@ -5,9 +5,8 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "sql_requests")
+@Table(name = "sql_questions")
 public class SQLRequest {
-    //TODO: РЕАЛИЗОВАТЬ
 
     @Id
     @Column(name = "id", nullable = false, unique = true)
@@ -16,22 +15,19 @@ public class SQLRequest {
     @Column(name = "question_message", nullable = false)
     private String questionMessage;
 
-    @Column(name = "schema_name", nullable = false)
+    @Column(name = "schemaName", nullable = false)
     private String schemaName;
+
+    @OneToMany(mappedBy = "sqlQuestion")
+    private Set<Answer> sqlQuestions;
 
     @ManyToOne
     @JoinColumn(name="test_id")
     private Test test;
 
-    public SQLRequest( String questionMessage, String schemaName, Test test) {
+    public SQLRequest(){
         this.id = UUID.randomUUID().toString();
-        this.questionMessage = questionMessage;
-        this.schemaName = schemaName;
-        this.test = test;
     }
-
-    @OneToMany(mappedBy = "answers")
-    private Set<Answer> answers;
 
     public String getId() {
         return id;
@@ -57,19 +53,19 @@ public class SQLRequest {
         this.schemaName = schemaName;
     }
 
+    public Set<Answer> getSqlQuestions() {
+        return sqlQuestions;
+    }
+
+    public void setSqlQuestions(Set<Answer> sqlQuestions) {
+        this.sqlQuestions = sqlQuestions;
+    }
+
     public Test getTest() {
         return test;
     }
 
     public void setTest(Test test) {
         this.test = test;
-    }
-
-    public Set<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(Set<Answer> answers) {
-        this.answers = answers;
     }
 }

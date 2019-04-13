@@ -1,13 +1,13 @@
 package root.domain.model.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Table(name = "groups")
 public class Group {
-
 
     @Id
     @Column(name = "id", nullable = false, unique = true)
@@ -19,7 +19,7 @@ public class Group {
     @Column(name = " students_number")
     private Integer studentsNumder;
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "group")
     private Set<User> students;
 
     public Group(String number){

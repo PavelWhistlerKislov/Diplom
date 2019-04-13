@@ -7,28 +7,27 @@ import java.util.UUID;
 @Entity
 @Table(name = "open_questions")
 public class OpenQuestion {
+
     @Id
     @Column(name = "id", nullable = false, unique = true)
     private String id;
 
     @Column(name = "question_message", nullable = false)
-    String questionMessage;
+    private String questionMessage;
 
-    @Column(name = "question_answer", nullable = false)
-    String rightAnswer;
-
-    @OneToMany(mappedBy = "answers")
-    private Set<Answer> answers;
+    @Column(name = "right_answer", nullable = false)
+    private String rightAnswer;
 
     @ManyToOne
-    @JoinColumn(name="test_id", nullable = false)
+    @JoinColumn(name="test_id")
     private Test test;
 
-    public OpenQuestion(String questionMessage, String rightAnswer, Test test) {
+    @OneToMany(mappedBy = "openQuestion")
+    private Set<Answer> answers;
+
+
+    public OpenQuestion(){
         this.id = UUID.randomUUID().toString();
-        this.questionMessage = questionMessage;
-        this.rightAnswer = rightAnswer;
-        this.test = test;
     }
 
     public String getId() {
@@ -55,19 +54,19 @@ public class OpenQuestion {
         this.rightAnswer = rightAnswer;
     }
 
-    public Set<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(Set<Answer> answers) {
-        this.answers = answers;
-    }
-
     public Test getTest() {
         return test;
     }
 
     public void setTest(Test test) {
         this.test = test;
+    }
+
+    public Set<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(Set<Answer> answers) {
+        this.answers = answers;
     }
 }

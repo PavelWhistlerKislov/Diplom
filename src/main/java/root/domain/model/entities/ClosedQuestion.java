@@ -15,35 +15,22 @@ public class ClosedQuestion {
     @Column(name = "question_message", nullable = false)
     private String questionMessage;
 
-    @OneToMany(mappedBy = "closed_question_answer_variants")
-    private Set<ClosedQuestionAnswerVariant> closedQuestionAnswerVariants;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private Set<ClosedQuestionAnswerVariant> questionAnswers;
+
+    @OneToOne(mappedBy = "ForRightAnswer" )
+    private ClosedQuestionAnswerVariant rightAnswer;
+
+    @OneToMany(mappedBy = "closedQuestion")
+    private Set<Answer> givenAnswers;
 
     @ManyToOne
-    @JoinColumn(name="test_id", nullable = false)
+    @JoinColumn(name="test_id")
     private Test test;
 
-    @OneToMany(mappedBy = "answers")
-    private Set<Answer> answers;
-
-    public ClosedQuestion(String questionMessage, Test test){
+    public ClosedQuestion(){
         this.id = UUID.randomUUID().toString();
-        this.test = test;
-    }
-
-    public Set<ClosedQuestionAnswerVariant> getClosedQuestionAnswerVariants() {
-        return closedQuestionAnswerVariants;
-    }
-
-    public void setClosedQuestionAnswerVariants(Set<ClosedQuestionAnswerVariant> closedQuestionAnswerVariants) {
-        this.closedQuestionAnswerVariants = closedQuestionAnswerVariants;
-    }
-
-    public Set<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(Set<Answer> answers) {
-        this.answers = answers;
     }
 
     public String getId() {
@@ -60,6 +47,38 @@ public class ClosedQuestion {
 
     public void setQuestionMessage(String questionMessage) {
         this.questionMessage = questionMessage;
+    }
+
+    public Set<ClosedQuestionAnswerVariant> getQuestionAnswers() {
+        return questionAnswers;
+    }
+
+    public void setQuestionAnswers(Set<ClosedQuestionAnswerVariant> questionAnswers) {
+        this.questionAnswers = questionAnswers;
+    }
+
+    public ClosedQuestionAnswerVariant getRightAnswer() {
+        return rightAnswer;
+    }
+
+    public void setRightAnswer(ClosedQuestionAnswerVariant rightAnswer) {
+        this.rightAnswer = rightAnswer;
+    }
+
+    public Set<Answer> getGiwenAnswers() {
+        return givenAnswers;
+    }
+
+    public void setGiwenAnswers(Set<Answer> giwenAnswers) {
+        this.givenAnswers = giwenAnswers;
+    }
+
+    public Set<Answer> getGivenAnswers() {
+        return givenAnswers;
+    }
+
+    public void setGivenAnswers(Set<Answer> givenAnswers) {
+        this.givenAnswers = givenAnswers;
     }
 
     public Test getTest() {

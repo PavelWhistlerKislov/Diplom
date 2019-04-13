@@ -4,11 +4,10 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
-import static javax.persistence.CascadeType.ALL;
-
 @Entity
 @Table(name = "modules")
 public class Module {
+
     @Id
     @Column(name = "id", nullable = false, unique = true)
     private String id;
@@ -17,16 +16,14 @@ public class Module {
     private String number;
 
     @ManyToOne
-    @JoinColumn(name="subject_id", nullable=false)
+    @JoinColumn(name="subject_id")
     private Subject subject;
 
-    @OneToMany(mappedBy = "tests")
+    @OneToMany(mappedBy = "module")
     private Set<Test> tests;
 
-    public Module(String number, Subject subject){
+    public Module(){
         this.id = UUID.randomUUID().toString();
-        this.number = number;
-        this.subject = subject;
     }
 
     public String getId() {

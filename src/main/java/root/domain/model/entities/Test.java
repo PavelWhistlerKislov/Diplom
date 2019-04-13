@@ -4,11 +4,10 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
-import static javax.persistence.CascadeType.ALL;
-
 @Entity
 @Table(name = "tests")
 public class Test {
+
     @Id
     @Column(name = "id", nullable = false, unique = true)
     private String id;
@@ -17,23 +16,18 @@ public class Test {
     @JoinColumn(name="module_id")
     private Module module;
 
-    public Test(Module module){
-        this.id = UUID.randomUUID().toString();
-        this.module = module;
-    }
-
-    public Test() {
-        this.id = UUID.randomUUID().toString();
-    }
-
-    @OneToMany(mappedBy = "open_questions")
+    @OneToMany(mappedBy = "test")
     private Set<OpenQuestion> openQuestions;
 
-    @OneToMany(mappedBy = "closed_questions")
+    @OneToMany(mappedBy = "test")
     private Set<ClosedQuestion> closedQuestions;
 
-    @OneToMany(mappedBy = "sql_questions")
+    @OneToMany(mappedBy = "test")
     private Set<SQLRequest> sqlRequests;
+
+    public Test(){
+        this.id = UUID.randomUUID().toString();
+    }
 
     public String getId() {
         return id;

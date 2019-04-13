@@ -1,10 +1,9 @@
 package root.domain.model.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
-import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @Table(name = "subjects")
@@ -17,13 +16,15 @@ public class Subject {
     @Column(name = "subject_name", nullable = false)
     private String subjectName;
 
-    @ManyToMany(mappedBy = "learnedSubjects")
-    private Set<User> students;
-
-    @OneToMany(cascade=ALL, mappedBy = "modules")
+    @OneToMany(mappedBy = "subject")
     private Set<Module> modules;
 
-    public Subject(String subjectName){
+    @ManyToMany(mappedBy = "subjects")
+    private Set<User> students = new HashSet<>();
+
+    public Subject(){ this.id = UUID.randomUUID().toString();}
+
+    public Subject(String subjectName ){
         this.id = UUID.randomUUID().toString();
         this.subjectName = subjectName;
     }
@@ -44,19 +45,19 @@ public class Subject {
         this.subjectName = subjectName;
     }
 
-    public Set<User> getStudents() {
-        return students;
-    }
-
-    public void setStudents(Set<User> students) {
-        this.students = students;
-    }
-
     public Set<Module> getModules() {
         return modules;
     }
 
     public void setModules(Set<Module> modules) {
         this.modules = modules;
+    }
+
+    public Set<User> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<User> students) {
+        this.students = students;
     }
 }
