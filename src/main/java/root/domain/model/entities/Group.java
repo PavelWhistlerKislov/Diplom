@@ -2,6 +2,7 @@ package root.domain.model.entities;
 
 import javax.persistence.*;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "groups")
@@ -15,10 +16,16 @@ public class Group {
     @Column(name = "group_number", nullable = false)
     private String number;
 
-    //TODO:STUDENTS
+    @Column(name = " students_number")
+    private Integer studentsNumder;
 
     @OneToMany(mappedBy = "users")
     private Set<User> students;
+
+    public Group(String number){
+        this.id = UUID.randomUUID().toString();
+        this.number = number;
+    }
 
     public String getId() {
         return id;
@@ -42,5 +49,13 @@ public class Group {
 
     public void setStudents(Set<User> students) {
         this.students = students;
+    }
+
+    public Integer getStudentsNumder() {
+        return studentsNumder;
+    }
+
+    public void setStudentsNumder(Integer studentsNumder) {
+        this.studentsNumder = studentsNumder;
     }
 }

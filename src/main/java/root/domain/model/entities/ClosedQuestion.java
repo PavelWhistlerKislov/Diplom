@@ -1,6 +1,7 @@
 package root.domain.model.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -14,14 +15,35 @@ public class ClosedQuestion {
     @Column(name = "question_message", nullable = false)
     private String questionMessage;
 
-    //TODO: Доделать
+    @OneToMany(mappedBy = "closed_question_answer_variants")
+    private Set<ClosedQuestionAnswerVariant> closedQuestionAnswerVariants;
 
     @ManyToOne
-    @JoinColumn(name="test_id")
+    @JoinColumn(name="test_id", nullable = false)
     private Test test;
 
-    public ClosedQuestion(){
+    @OneToMany(mappedBy = "answers")
+    private Set<Answer> answers;
+
+    public ClosedQuestion(String questionMessage, Test test){
         this.id = UUID.randomUUID().toString();
+        this.test = test;
+    }
+
+    public Set<ClosedQuestionAnswerVariant> getClosedQuestionAnswerVariants() {
+        return closedQuestionAnswerVariants;
+    }
+
+    public void setClosedQuestionAnswerVariants(Set<ClosedQuestionAnswerVariant> closedQuestionAnswerVariants) {
+        this.closedQuestionAnswerVariants = closedQuestionAnswerVariants;
+    }
+
+    public Set<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(Set<Answer> answers) {
+        this.answers = answers;
     }
 
     public String getId() {

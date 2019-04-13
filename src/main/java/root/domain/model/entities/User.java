@@ -2,6 +2,7 @@ package root.domain.model.entities;
 
 import root.domain.model.enums.UserRole;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
@@ -23,7 +24,7 @@ public class User{
     @Column(name = "course")
     private String course;
 
-    @Column(name = "role")
+    @Column(name = "role",nullable = false)
     private UserRole role;
 
     @Column(name = "login", nullable = false)
@@ -35,6 +36,25 @@ public class User{
     @ManyToOne
     @JoinColumn(name="group_id")
     private Group group;
+
+    public Set<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(Set<Answer> answers) {
+        this.answers = answers;
+    }
+
+    public Set<Subject> getLearnedSubjects() {
+        return learnedSubjects;
+    }
+
+    public void setLearnedSubjects(Set<Subject> learnedSubjects) {
+        this.learnedSubjects = learnedSubjects;
+    }
+
+    @OneToMany(mappedBy = "answers")
+    private Set<Answer> answers;
 
     @ManyToMany
     @JoinTable(
@@ -57,10 +77,13 @@ public class User{
         this.id = UUID.randomUUID().toString();
     }
 
-    public User(String firstName, String lastName) {
+    public User(String firstName, String lastName, String password, String login, UserRole role) {
         this.id = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;
+        this.login = login;
+        this.role =role;
+        this.password = password;
     }
 
 
