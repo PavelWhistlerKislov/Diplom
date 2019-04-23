@@ -1,0 +1,4 @@
+1.Переходим https://ondras.zarovi.cz/sql/demo/ 
+2.Save/Load
+3.Server -> Load
+4.вводим DiplomDataBase
