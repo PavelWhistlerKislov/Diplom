@@ -35,6 +35,15 @@ public class Answer {
     @Column(name = "answer_type", nullable = false)
     private AnswerType answerType;
 
+    @Column(name = "answer_status", nullable = false)
+    private Boolean answerStatus;
+    private Boolean getAnswerStatus() {
+        return answerStatus;
+    }
+
+    public void setAnswerStatus(Boolean answerStatus) {
+        this.answerStatus = answerStatus;
+    }
 
     public Answer(){
         this.id = UUID.randomUUID().toString();

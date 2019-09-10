@@ -22,15 +22,15 @@ public class User{
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "role",nullable = false)
-    private UserRole role;
-
     @Column(name = "login", nullable = false)
     private String login;
 
     @Column(name = "password", nullable = false)
     private String password;
+    @Column(name = "role",nullable = false)
+    private UserRole role;
 
+    /*Звязи*/
     @ManyToOne
     @JoinColumn(name="group_id")
     private Group group;
@@ -42,25 +42,41 @@ public class User{
     @ManyToMany
     @JoinTable(
             name = "user_subject",
-            joinColumns = { @JoinColumn(name = "user_id") },
-            inverseJoinColumns = { @JoinColumn(name = "subject_id") }
+            joinColumns =  @JoinColumn(name = "user_id") ,
+            inverseJoinColumns = @JoinColumn(name = "subject_id")
     )
-    Set<Subject> subjects = new HashSet<>();
+    private  Set<Subject> subjects = new HashSet<>();
 
+    public Set<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(Set<Answer> answers) {
+        this.answers = answers;
+    }
+
+    public Set<Subject> getMentedSubjects() {
+        return mentedSubjects;
+    }
+
+    public void setMentedSubjects(Set<Subject> mentedSubjects) {
+        this.mentedSubjects = mentedSubjects;
+    }
+
+    @ManyToMany
+    @JoinTable(
+            name = "mentor_subject",
+            joinColumns =  @JoinColumn(name = "mentor_id") ,
+            inverseJoinColumns = @JoinColumn(name = "subject_id")
+    )
+    private Set<Subject> mentedSubjects = new HashSet<>();
+
+    @ManyToMany(mappedBy = "userTests")
+    private Set<Test> tests;
 
     public User(){
         this.id = UUID.randomUUID().toString();
     }
-
-    public User(String firstName, String lastName, String password, String login, UserRole role) {
-        this.id = UUID.randomUUID().toString();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.login = login;
-        this.role =role;
-        this.password = password;
-    }
-
 
     public String getId() {
         return id;

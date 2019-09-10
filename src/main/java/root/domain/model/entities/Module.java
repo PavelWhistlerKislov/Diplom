@@ -13,7 +13,10 @@ public class Module {
     private String id;
 
     @Column(name = "module_number", nullable = false)
-    private String number;
+    private Integer number;
+
+    @Column(name = "module_name")
+    private String name;
 
     @ManyToOne
     @JoinColumn(name="subject_id")
@@ -34,11 +37,11 @@ public class Module {
         this.id = id;
     }
 
-    public String getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
@@ -56,5 +59,13 @@ public class Module {
 
     public void setTests(Set<Test> tests) {
         this.tests = tests;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

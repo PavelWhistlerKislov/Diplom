@@ -20,11 +20,22 @@ public class Subject {
     private Set<Module> modules;
 
     @ManyToMany(mappedBy = "subjects")
-    private Set<User> students = new HashSet<>();
+    private Set<User> students ;
+
+    public Set<User> getMentors() {
+        return mentors;
+    }
+
+    public void setMentors(Set<User> mentors) {
+        this.mentors = mentors;
+    }
+
+    @ManyToMany(mappedBy = "mentedSubjects")
+    private Set<User> mentors ;
 
     public Subject(){ this.id = UUID.randomUUID().toString();}
 
-    public Subject(String subjectName ){
+    public Subject(String subjectName){
         this.id = UUID.randomUUID().toString();
         this.subjectName = subjectName;
     }

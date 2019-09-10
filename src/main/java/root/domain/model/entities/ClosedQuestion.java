@@ -15,19 +15,26 @@ public class ClosedQuestion {
     @Column(name = "question_message", nullable = false)
     private String questionMessage;
 
-
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private Set<ClosedQuestionAnswerVariant> questionAnswers;
 
-    @OneToOne(mappedBy = "ForRightAnswer" )
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "right_answer_id", referencedColumnName = "id")
     private ClosedQuestionAnswerVariant rightAnswer;
 
     @OneToMany(mappedBy = "closedQuestion")
-    private Set<Answer> givenAnswers;
+    private Set<Answer> answers;
 
-    @ManyToOne
-    @JoinColumn(name="test_id")
-    private Test test;
+    private Set<Test> getTests() {
+        return tests;
+    }
+
+    public void setTests(Set<Test> tests) {
+        this.tests = tests;
+    }
+
+    @ManyToMany(mappedBy = "openQuestions")
+    private Set<Test> tests;
 
     public ClosedQuestion(){
         this.id = UUID.randomUUID().toString();
@@ -66,26 +73,19 @@ public class ClosedQuestion {
     }
 
     public Set<Answer> getGiwenAnswers() {
-        return givenAnswers;
+        return answers;
     }
 
     public void setGiwenAnswers(Set<Answer> giwenAnswers) {
-        this.givenAnswers = giwenAnswers;
+        this.answers = giwenAnswers;
     }
 
     public Set<Answer> getGivenAnswers() {
-        return givenAnswers;
+        return answers;
     }
 
     public void setGivenAnswers(Set<Answer> givenAnswers) {
-        this.givenAnswers = givenAnswers;
+        this.answers = givenAnswers;
     }
 
-    public Test getTest() {
-        return test;
-    }
-
-    public void setTest(Test test) {
-        this.test = test;
-    }
 }

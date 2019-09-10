@@ -18,8 +18,7 @@ public class ClosedQuestionAnswerVariant {
     @JoinColumn(name="closed_question_id", nullable = false)
     private ClosedQuestion question;
 
-    @OneToOne
-    @MapsId
+    @OneToOne(mappedBy = "rightAnswer")
     private ClosedQuestion  ForRightAnswer;
 
     public ClosedQuestionAnswerVariant(){

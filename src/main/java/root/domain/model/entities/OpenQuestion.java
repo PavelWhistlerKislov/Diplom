@@ -18,9 +18,8 @@ public class OpenQuestion {
     @Column(name = "right_answer", nullable = false)
     private String rightAnswer;
 
-    @ManyToOne
-    @JoinColumn(name="test_id")
-    private Test test;
+    @ManyToMany(mappedBy = "openQuestions")
+    private Set<Test> tests;
 
     @OneToMany(mappedBy = "openQuestion")
     private Set<Answer> answers;
@@ -54,12 +53,12 @@ public class OpenQuestion {
         this.rightAnswer = rightAnswer;
     }
 
-    public Test getTest() {
-        return test;
+    public Set<Test> getTest() {
+        return tests;
     }
 
-    public void setTest(Test test) {
-        this.test = test;
+    public void setTest(Set<Test> tests) {
+        this.tests = tests;
     }
 
     public Set<Answer> getAnswers() {

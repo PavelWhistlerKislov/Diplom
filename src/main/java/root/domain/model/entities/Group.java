@@ -24,7 +24,6 @@ public class Group {
 
     public Group(String number){
         this.id = UUID.randomUUID().toString();
-        this.number = number;
     }
 
     public String getId() {

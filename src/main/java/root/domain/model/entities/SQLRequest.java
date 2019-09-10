@@ -15,15 +15,25 @@ public class SQLRequest {
     @Column(name = "question_message", nullable = false)
     private String questionMessage;
 
+    public String getRightAnswer() {
+        return rightAnswer;
+    }
+
+    public void setRightAnswer(String rightAnswer) {
+        this.rightAnswer = rightAnswer;
+    }
+
+    @Column(name = "right_answer", nullable = false)
+    private String rightAnswer;
+
     @Column(name = "schemaName", nullable = false)
     private String schemaName;
 
     @OneToMany(mappedBy = "sqlQuestion")
     private Set<Answer> sqlQuestions;
 
-    @ManyToOne
-    @JoinColumn(name="test_id")
-    private Test test;
+    @ManyToMany(mappedBy = "openQuestions")
+    private Set<Test> tests;
 
     public SQLRequest(){
         this.id = UUID.randomUUID().toString();
@@ -61,11 +71,11 @@ public class SQLRequest {
         this.sqlQuestions = sqlQuestions;
     }
 
-    public Test getTest() {
-        return test;
+    public Set<Test> getTests() {
+        return tests;
     }
 
-    public void setTest(Test test) {
-        this.test = test;
+    public void setTests(Set<Test> tests) {
+        this.tests = tests;
     }
 }

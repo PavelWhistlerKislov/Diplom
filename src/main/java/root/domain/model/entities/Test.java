@@ -16,14 +16,38 @@ public class Test {
     @JoinColumn(name="module_id")
     private Module module;
 
-    @OneToMany(mappedBy = "test")
+
+    @ManyToMany
+    @JoinTable(
+            name = "test_open_questions",
+            joinColumns =  @JoinColumn(name = "test_id") ,
+            inverseJoinColumns = @JoinColumn(name = "open_question_id")
+    )
     private Set<OpenQuestion> openQuestions;
 
-    @OneToMany(mappedBy = "test")
+    @ManyToMany
+    @JoinTable(
+            name = "test_closed_questions",
+            joinColumns =  @JoinColumn(name = "test_id") ,
+            inverseJoinColumns = @JoinColumn(name = "closed_question_id")
+    )
     private Set<ClosedQuestion> closedQuestions;
 
-    @OneToMany(mappedBy = "test")
+    @ManyToMany
+    @JoinTable(
+            name = "test_sql_questions",
+            joinColumns =  @JoinColumn(name = "test_id") ,
+            inverseJoinColumns = @JoinColumn(name = "sql_question_id")
+    )
     private Set<SQLRequest> sqlRequests;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_tests",
+            joinColumns =  @JoinColumn(name = "user_id") ,
+            inverseJoinColumns = @JoinColumn(name = "test_id")
+    )
+    private Set<User> userTests;
 
     public Test(){
         this.id = UUID.randomUUID().toString();
