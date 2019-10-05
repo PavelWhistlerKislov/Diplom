@@ -1,11 +1,8 @@
 package root.domain.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import root.domain.model.entities.User;
 import root.domain.repo.UserRepository;
 
@@ -23,8 +20,8 @@ public class MainController {
                return userRepository.findAll();
     }
 
-    @GetMapping("/get-user/{firstName}")
-    public List<User> main(@PathVariable String firstName) {
+    @GetMapping("/get-user")
+    public List<User> getUser( @RequestParam(value="firstName", required=false) String firstName) {
         return userRepository.findByFirstNameStartsWithIgnoreCase(firstName);
     }
 
